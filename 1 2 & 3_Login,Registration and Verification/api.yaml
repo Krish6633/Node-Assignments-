@@ -1,0 +1,109 @@
+openapi: 3.0.3
+info:
+  title: Practical 1, 2 and 3
+  description: |-
+    1. Create login and register APIs
+    2. Send mail when user register
+    3. API for user verification
+ 
+  contact:
+    email: krishkevadiya6633@gmail.com
+  version: 1.0.11
+servers:
+  - url: http://localhost:5000
+tags:
+  - name: User
+    description: Login and Register APIs 
+  - name: Verification
+    description: User verification
+   
+paths:
+  /login:
+    post:
+      tags:
+        - User
+      summary: Login from here
+      description: Login using email and password
+      requestBody:
+        description: Email and Password
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/login'
+        required: true
+      responses:
+        '200':
+          description: Login Successfully...
+        '404':
+          description: User not found
+  /register:
+    post:
+      tags:
+        - User
+      summary: Register from here
+      description: Enter your details - name, email, password, dob, mobile
+      requestBody:
+        description: name, email, password, dob, mobile
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+        required: true
+      responses:
+        '200':
+          description: Registered successfully
+  /verify:
+    post:
+      tags:
+        - Verification
+      summary: Verify user
+      description: Need token
+      requestBody:
+        description: Send token in header
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/verify'
+      responses:
+        '200':
+          description: User successfully verified...
+        '404':
+          description: Token not found
+        '401':
+          description: Unauthorized user
+          
+        
+  
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+        name:
+          type: string
+          example: krish
+        email:
+          type: string
+          example: krish123@gmai.com
+        password: 
+          type: string
+        mobile:
+          type: integer
+          example: 8238845682
+        dob:
+          type: string
+          example: 12-20-2022 
+    login:
+      type: object
+      properties:
+        email:
+          type: string
+          example: krish123@gmail.com
+        password: 
+          type: string
+    verify:
+      type: object
+      properties:
+        Authorization:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9

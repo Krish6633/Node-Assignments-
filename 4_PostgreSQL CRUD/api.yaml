@@ -1,0 +1,112 @@
+openapi: 3.0.3
+info:
+  title: Practical 4
+  description: CRUD operations with PostgreSQL
+ 
+  contact:
+    email: krishkevadiya6633@gmail.com
+  version: 1.0.11
+servers:
+  - url: http://localhost:5000
+tags:
+  - name: User
+    description: CRUD APIs
+   
+paths:
+  /user:
+    get:
+      tags:
+        - User
+      summary: Get records of all users
+      description: Get all information of users
+      responses:
+        '200':
+          description: Get users
+    post:
+      tags:
+        - User
+      summary: Create new user
+      description: Give data like id, name and address
+      requestBody:
+        description: ID, name and Address
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+        required: true
+      responses:
+        '200':
+          description: Record created...
+    put:
+      tags:
+        - User
+      summary: Update an existing user
+      description: Update an existing user by ID
+      parameters:
+        - name: ID
+          in: path
+          description: Update information of particular user with ID
+          required: true
+      requestBody:
+        description: Update an existent User
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update'
+        required: true
+      responses:
+        '200':
+          description: Record created...
+    delete:
+      tags:
+        - User
+      summary: Deletes user
+      description: Delete a user with ID
+      parameters:
+        - name: ID
+          in: path
+          description: 'Delete by ID'
+          required: true
+      responses:
+        '200':
+          description: Record deleted...
+  /user/{id}:
+    get:
+      tags:
+        - User
+      summary: Get records of a user
+      description: Get all information of a user
+      parameters:
+        - name: ID
+          in: path
+          description: Get information of particular user with ID
+          required: true
+      responses:
+        '200':
+          description: Get users
+  
+   
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 8
+        name:
+          type: string
+          example: Krish
+        address:
+          type: string
+          example: Surat
+    update:
+      type: object
+      properties:
+        name:
+          type: string
+          example: krish
+        address: 
+          type: string
+          example: Delhi
+   

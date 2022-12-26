@@ -1,0 +1,72 @@
+openapi: 3.0.3
+info:
+  title: Practical 8
+  description: Filteration with date
+ 
+  contact:
+    email: krishkevadiya6633@gmail.com
+  version: 1.0.11
+servers:
+  - url: http://localhost:5000
+tags:
+  - name: Data
+    description: Filteration
+   
+paths:
+  /fetch:
+    post:
+      tags:
+        - Data
+      summary: Get data between two dates
+      description: Get all information from Date1 to Date2
+      requestBody:
+        description: Date1 and Date2
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/date'
+        required: true
+      responses:
+        '200':
+          description: Get data
+  /insert:
+    post:
+      tags:
+        - Data
+      summary: Insert new record
+      description: Give data like name, email and address
+      requestBody:
+        description: name,email and address
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/user'
+        required: true
+      responses:
+        '200':
+          description: data inserted...
+    
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Krish
+        email:
+          type: string
+          example: krish@gmail.com
+        address:
+          type: string
+          example: Surat
+    date:
+      type: object
+      properties:
+        startdate:
+          type: string
+          example: 2022-10-30
+        enddate:
+          type: string
+          example: 2022-12-31
+      

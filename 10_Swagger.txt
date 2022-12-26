@@ -1,0 +1,1 @@
+Swagger documentation files are saved as api.YAML in each folder also avaliable at https://localhost:5000/api-docs
